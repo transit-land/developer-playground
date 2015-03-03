@@ -1,35 +1,28 @@
 var DeveloperPlayground = DeveloperPlayground || {};
 
 DeveloperPlayground.TableView = Backbone.View.extend({
-    el: 'table',
+    el: 'table#table-view',
 
     // template: _.template($('#table-template').html(), {stops: stops.models}),
      
-    initialize:function(){
+    initialize:function(options){
+        this.collection = options.collection;
         // this.render();
         console.log("tableview initialized");
-        _.bindAll(this, 'render', 'renderOne');
-        // this.listenTo(DeveloperPlayground.Stops, 'add', this.addOne);
-        // DeveloperPlayground.Stops.fetch():
+        this.listenTo(this.collection, 'add', this.renderRow);
     },
 
     render: function () {
         // var template = _.template($('#stop-list-template').html(), {stops: stops.models});
         // this.$el.html(template);
-        // this.collection.each(this.renderOne);
-        // return this;
+        this.collection.each(this.renderRow);
+        return this;
     },
 
-    // renderOne: function(model) {
-    //     var row=new RowView({model:model});
-    //     this.$el.append(row.render().$el);
-    //     return this;
-    // }
-
-    //  addOne: function(todo) {
-    //	var row = new DeveloperPlayground.StopRow({model:stop});
-    //	$('#stop-list-template-list').append(row.render().el);
-    //  },
+     renderRow: function(model) {
+    	var rowView = new DeveloperPlayground.RowView({model: model});
+    	$("tbody", this.$el).append(rowView.render().$el);
+     },
 
     // add_stop: function(stop) {
     //     // add a stop to the table

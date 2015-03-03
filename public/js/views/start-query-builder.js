@@ -17,10 +17,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         this.stops = new DeveloperPlayground.Stops();
         // Create views
         this.mapview = new DeveloperPlayground.MapView();
-        this.tableview = new DeveloperPlayground.TableView();
         // Connect collections to views
         this.mapview.listenTo(this.stops, 'add', this.mapview.add_stop);
-        this.tableview.listenTo(this.stops, 'add', this.tableview.add_stop);
         // Render it all
         this.render();
 
@@ -104,6 +102,9 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
                 });
             // DeveloperPlayground.startQueryBuilderView.stops.models[0].attributes.geometry.coordinates
                 this.stops.fetch();
+                this.tableview = new DeveloperPlayground.TableView({
+                    collection: this.stops
+                });
                 this.tableview.render();
                 this.mapview.render();
         } else if($parameterSelect.val() == "hello") {

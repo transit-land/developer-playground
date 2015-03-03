@@ -2,35 +2,20 @@ var DeveloperPlayground = DeveloperPlayground || {};
 
 DeveloperPlayground.RowView = Backbone.View.extend({
 	tagName: 'tr',
-	// template: _.template( $('#stop-template').html() ),
+	template: _.template( $('#row-template').html() ),
 	events: {
 		"click .latitude": function() {console.log(this.model.get("latitude"));}
 	},
 	
 	initialize: function() {
-        _.bindAll(this, 'render', 'renderOne');
 		// _.bindAll(this, 'render');
 		// this.listenTo(this.model, 'change', this.render);
 	},
 	
 	render: function() {
-		// Clear existing row data if needed
-		// test this out:
-		this.model.each(this.renderOne);
-		var html = rowTemplate(this.model());
-		this.setElement($(html));
-        return this;
-        // example:
-		// var html = rowTemplate(this.model());
-		// this.setElement($(html));
-		// return this;
-	},
-
-	renderOne: function(model) {
-        var row=new RowView({model:model});
-        this.$el.append(row.render().$el);
-        return this;
-    },
+		this.$el.html(this.template(this.model.toJSON()));
+    return this;
+	}
 });
 
 	// Write the table columns
