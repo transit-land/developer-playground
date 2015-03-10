@@ -30,14 +30,15 @@ DeveloperPlayground.RowView = Backbone.View.extend({
 	},
 
 
-	clearRows: function() {
-        console.log("clear rows here");
-        // this.model.close();
-        // $("tbody", this.$el).empty();
-        this.$el.empty();
-        return this;
+	// clearRows: function() {
+ //        console.log("clear rows here");
+ //        // this.model.close();
+ //        // $("tbody", this.$el).empty();
+ //        debugger
+ //        this.$el.empty();
+ //        return this;
 
-    }
+ //    }
 
  });
 
