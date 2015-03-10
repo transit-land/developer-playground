@@ -43,11 +43,11 @@ DeveloperPlayground.TableView = Backbone.View.extend({
 
     // },
 
-    // remove: function() {
-    //   this.$el.empty().off();  off to unbind the events 
-    //   this.stopListening();
-    //   return this;
-    // }
+    close: function() {
+      $('thead, tbody', this.$el).empty(); //.off();  off to unbind the events 
+      this.stopListening();
+      return this;
+    }
 
 });
 
