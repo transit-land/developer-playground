@@ -72,7 +72,7 @@ DeveloperPlayground.MapView = Backbone.View.extend({
 
         var routeStyle = {
             color: "#7720f2",
-            // color: feature.properties.tags.route_color,
+            // color: "#"+feature.attributes.tags.route_color,
             weight: 3,
             opacity: 1,
             className: 'blah'

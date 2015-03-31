@@ -101,13 +101,13 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             if($parameterSelect.val() == "map view") {
             collection = this.stops;
             this.stops.setQueryParameters({
-                    url: '/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
+                    url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
                 });
             // for search by operator name
             } else if($parameterSelect.val() == "operator") {
                 collection = this.stops;
                 this.stops.setQueryParameters({
-                    url: '/api/v1/'+$entitySelect.val()+'.json?operatedBy='+identifier,
+                    url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?operatedBy='+identifier,
                 });
                 console.log("url: ", this.url);
             }
@@ -119,7 +119,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             if($parameterSelect.val() == "map view") {
                 collection = this.operators;
                 this.operators.setQueryParameters({
-                    url: '/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
+                    url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
                 });
             } else if($parameterSelect.val() == "name") {
                 console.log("operators by name");
@@ -136,12 +136,12 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             if($parameterSelect.val() == "map view") {
                 collection = this.routes;
                 this.routes.setQueryParameters({
-                    url: '/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
+                    url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds
                 });
             } else if($parameterSelect.val() == "operator") {
                 collection = this.routes;
                 this.routes.setQueryParameters({
-                    url: '/api/v1/'+$entitySelect.val()+'.json?operatedBy='+identifier,
+                    url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?operatedBy='+identifier,
                 });
                 console.log("url: ", this.url);
             } else if($parameterSelect.val() == "route number") {
