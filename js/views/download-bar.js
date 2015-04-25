@@ -9,19 +9,19 @@ DeveloperPlayground.DownloadView = Backbone.View.extend({
         'click .btn' : 'submit',
     },
 
-	initialize:function(options){
-        this.collection = options.collection;
-	},
-
 	render: function() {
 		renderedHtml = this.template();
-		this.$el.html(renderedHtml);
+		this.$el.html(renderedHtml); 
 		return this;
-	},
+		},
+
+	setCollection: function(options){
+        this.collection = options.collection;
+    },
 
 	submit: function(event) {
 		url = this.collection.url;
-
+        
 		if (event.target.id == "csv") {
 			url = url.replace(".json", ".csv");
 		} else if (event.target.id == "json") {
@@ -32,5 +32,6 @@ DeveloperPlayground.DownloadView = Backbone.View.extend({
 		window.open(url, '_blank');
 
 	}
+
 
  });

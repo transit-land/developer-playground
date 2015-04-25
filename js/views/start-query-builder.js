@@ -8,7 +8,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
     events: {
         'change .form-control#entity': 'changeParam',
-        'change .form-control#parameter': 'changeName',
+        'change .form-control#parameter': 'changeFilter',
         'click .btn#run-query-btn' : 'submit'
     },
 
@@ -25,6 +25,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
         this.mapview = new DeveloperPlayground.MapView();
         this.mapview.render();
+        this.downloadview = new DeveloperPlayground.DownloadView();
+        this.downloadview.render();
         return this;
     },
 
@@ -69,12 +71,14 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         return this;
     },
     
-    changeName: function() {
+    changeFilter: function() {
         var $parameterSelect = $('select.form-control#parameter');
 
         if($parameterSelect.val() == "name" || $parameterSelect.val() == "operator") {
             collection = this.operators;
+            $("#locationMenu").hide();
             $(".form-control#name").show();
+
             if(!$("#nameMenu").hasClass("dropdown")) $("#nameMenu").addClass("dropdown");
             if ('undefined' !== typeof this.nameListView) {
                 this.nameListView.close();
@@ -87,8 +91,17 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
                 });
             collection.fetch();
             return this;
+        } else if($parameterSelect.val() == "map view") {
+            $("#locationMenu").show();
+            
+            console.log("select map view");
+            this.mapview.changeLocation();
+
+
+
         } else {
             $(".form-control#name").hide();
+            $("#locationMenu").hide();
             if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
         }
 
@@ -165,9 +178,9 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         this.mapview.markerclustergroup.clearLayers();
         this.mapview.clearCollection();
         this.mapview.setCollection({collection: collection});
-        this.mapview.initialize({collection: collection});
-        this.downloadview = new DeveloperPlayground.DownloadView({collection: collection});
-        this.downloadview.render();
+
+        this.downloadview.setCollection({collection: collection});
+        // this.downloadview.showTemplate();
 
 
         if ('undefined' !== typeof this.gridview) this.gridview.close();

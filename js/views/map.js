@@ -33,7 +33,6 @@ DeveloperPlayground.MapView = Backbone.View.extend({
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         })
         .addTo(this.map);
-        L.control.locations({ position: 'topright', keepCurrentZoomLevel: true }).addTo(this.map);
         return this;
     },
 
@@ -42,6 +41,11 @@ DeveloperPlayground.MapView = Backbone.View.extend({
         this.bBoxString=this.bounds.toBBoxString();
         return this.bBoxString;
         
+    },
+
+    changeLocation: function() {
+        // move map to NY or SF
+        console.log("change location");
     },
 
     addFeature: function(feature) {
