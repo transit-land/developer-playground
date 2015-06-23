@@ -150,8 +150,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         if ($entitySelect.val() == "stops") {
             // for search by map view
             if($parameterSelect.val() == "map view") {
-            collection = this.stops;
-            this.stops.setQueryParameters({
+                collection = this.stops;
+                this.stops.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });
             // for search by operator name
