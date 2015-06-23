@@ -7,7 +7,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
 
     events: {
-        'change .form-control#entity': 'changeParam',
+        'change .form-control#entity': 'selectEntity',
         'change .form-control#parameter': 'changeFilter',
         'click .btn#san-francisco': 'changeMapSF',
         'click .btn#new-york': 'changeMapNY',
@@ -58,6 +58,19 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         // analytics event tracking:
         ga('send', 'event', 'location toggle', 'click', 'NY');
     },
+
+    getSelectedEntity: function() {
+        return $('select.form-control#entity').val();
+    },
+
+    selectEntity: function() {
+        // set route
+        DeveloperPlayground.router.navigate(this.getSelectedEntity(), {trigger: true});
+        // remove this and have it go through a router
+        this.changeParam();
+
+    },
+
 
     changeParam: function() {
 
@@ -204,6 +217,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             collection.reset();
         }
 
+        // things like this (that touch on multiple views) should go in the router
         $("#download-bar").show();
         this.mapview.markerclustergroup.clearLayers();
         this.mapview.clearCollection();
