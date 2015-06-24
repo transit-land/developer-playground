@@ -94,6 +94,9 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
     },
 
+    selectMap: function(){
+        DeveloperPlayground.router.navigate(this.getSelectedEntity()+"/"+this.getSelectedParam()+"/"+this.mapview.getBounds(), {trigger: true});
+    },
 
     changeParam: function() {
 
@@ -187,6 +190,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             // for search by map view
             if($parameterSelect.val() == "map view") {
                 collection = this.stops;
+                this.selectMap();
                 this.stops.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });
@@ -204,6 +208,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             
             if($parameterSelect.val() == "map view") {
                 collection = this.operators;
+                this.selectMap();
                 this.operators.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });
@@ -220,6 +225,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         } else if ($entitySelect.val() == "routes") {
             if($parameterSelect.val() == "map view") {
                 collection = this.routes;
+                this.selectMap();
                 this.routes.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });
