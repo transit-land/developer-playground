@@ -14,7 +14,7 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 		":entity/name": "nameSelected",
 		// /routes/name/o-9q9-bart
 		":entity/:name/:operator": "operatorSelected",
-		// TODO: check leaflet bbox output format
+		// /operators/map/-122.49112129211424,37.732032162727855,-122.39481925964355,37.76596533600783
 		":entity/:map/:bbox": "bboxSet",
 		// TODO: add default route
 		"*path": "default"
@@ -22,9 +22,12 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 	},
 
 	entitySelected: function(entity){
-		// if entity == "routes"
+		if (entity == "routes" || entity == "operators" || entity == "stops") {
+			console.log("if: " + entity);
+		} else {
 		// add else function for no entity selected
-		console.log(entity);
+			console.log("else: " + entity);
+		}
 	},
 
 	parameterSelected: function(entity, parameter){
@@ -44,7 +47,7 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 	},
 
 	default: function(path){
-	console.log("default");
+		console.log("default");
 	}
 
 
