@@ -8,11 +8,12 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 		// /stops, /operators, /routes
 		":entity": "entitySelected",
 		// /stops/map, /operators/map, /routes/map
-		":entity/map": "TODO",
+		":entity/:parameter": "parameterSelected",
+		// ":entity/map": "entityMap",
 		// /stops/name, /operators/name, /routes/name
-		":entity/name": "TODO",
+		":entity/name": "nameSelected",
 		// /routes/name/o-9q9-bart
-		":entity/name/:operator": "TODO",
+		":entity/name/:operator": "operatorSelected",
 		// TODO: check leaflet bbox output format
 		// /routes/map/(bbox number)
 		":entity/map/:bbox": "TODO",
@@ -27,14 +28,21 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 		console.log(entity);
 	},
 
-	entityMap: function(entity){
-		console.log(entity, "map");
+	parameterSelected: function(entity, parameter){
+		console.log(entity, parameter);
+	},
+
+	nameSelected: function(entity, name){
+		console.log("name selected");
+	},
+
+	operatorSelected: function(entity, name, operator){
+		console.log(entity, name, operator);
+	},
+
+	default: function(path){
+	console.log("default");
 	}
-
-	// default: function(path){
-	// console.log("default");
-
-	// }
 
 
 });

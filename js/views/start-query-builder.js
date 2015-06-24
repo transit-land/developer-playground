@@ -8,7 +8,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
     events: {
         'change .form-control#entity': 'selectEntity',
-        'change .form-control#parameter': 'changeFilter',
+        'change .form-control#parameter': 'selectParam',
+        'change #nameMenu': 'selectName',
         'click .btn#san-francisco': 'changeMapSF',
         'click .btn#new-york': 'changeMapNY',
         'click .btn#run-query-btn' : 'submit'
@@ -63,11 +64,33 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         return $('select.form-control#entity').val();
     },
 
+    getSelectedParam: function() {
+        if ($('select.form-control#parameter').val() == "map view"){
+            return "map";
+        } else {
+            return $('select.form-control#parameter').val();
+        }
+    },
+
+    getSelectedName: function(){
+        return $('select.form-control#name').val();
+    },
+
     selectEntity: function() {
         // set route
         DeveloperPlayground.router.navigate(this.getSelectedEntity(), {trigger: true});
         // remove this and have it go through a router
         this.changeParam();
+
+    },
+
+    selectParam: function(){
+        DeveloperPlayground.router.navigate(this.getSelectedEntity()+"/"+this.getSelectedParam(), {trigger: true});
+        this.changeFilter();
+    },
+
+    selectName: function(){
+        DeveloperPlayground.router.navigate(this.getSelectedEntity()+"/"+this.getSelectedParam()+"/"+this.getSelectedName(), {trigger: true});
 
     },
 
