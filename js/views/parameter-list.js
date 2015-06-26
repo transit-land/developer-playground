@@ -6,7 +6,7 @@ DeveloperPlayground.ParameterListView = Backbone.View.extend({
     template: _.template( $('#parameter-list-template').html() ),
 
     events: {
-        'click #parameterMenu' : 'confirmView'
+        'click #parameter' : 'confirmView'
     },
 
     routes: {
