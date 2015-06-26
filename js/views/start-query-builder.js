@@ -33,6 +33,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
         this.entityListView = new DeveloperPlayground.EntityListView();
         this.entityListView.render();
+        this.parameterListView = new DeveloperPlayground.ParameterListView();
+        this.parameterListView.render();
         this.mapview = new DeveloperPlayground.MapView();
         this.mapview.render();
         this.downloadview = new DeveloperPlayground.DownloadView();
