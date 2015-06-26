@@ -8,46 +8,32 @@ DeveloperPlayground.Router = Backbone.Router.extend({
 		// /stops, /operators, /routes
 		":entity": "entitySelected",
 		// /stops/map, /operators/map, /routes/map
-		":entity/:parameter": "parameterSelected",
-		// ":entity/map": "entityMap",
+		":entity/map": "entityMap",
 		// /stops/name, /operators/name, /routes/name
-		":entity/name": "nameSelected",
+		":entity/name": "TODO",
 		// /routes/name/o-9q9-bart
-		":entity/:name/:operator": "operatorSelected",
-		// /operators/map/-122.49112129211424,37.732032162727855,-122.39481925964355,37.76596533600783
-		":entity/:map/:bbox": "bboxSet",
+		":entity/name/:operator": "TODO",
+		// TODO: check leaflet bbox output format
+		// /routes/map/(bbox number)
+		":entity/map/:bbox": "TODO",
 		// TODO: add default route
 		"*path": "default"
 
 	},
 
 	entitySelected: function(entity){
-		if (entity == "routes" || entity == "operators" || entity == "stops") {
-			console.log("if: " + entity);
-		} else {
+		// if entity == "routes"
 		// add else function for no entity selected
-			console.log("else: " + entity);
-		}
+		console.log(entity);
 	},
 
-	parameterSelected: function(entity, parameter){
-		console.log(entity, parameter);
-	},
-
-	nameSelected: function(entity, name){
-		console.log("name selected");
-	},
-
-	operatorSelected: function(entity, name, operator){
-		console.log(entity, name, operator);
-	},
-
-	bboxSet: function(entity, map, bbox){
-		console.log(entity, map, bbox);
+	entityMap: function(entity){
+		console.log(entity);
 	},
 
 	default: function(path){
-		console.log("default");
+	console.log("default");
+
 	}
 
 

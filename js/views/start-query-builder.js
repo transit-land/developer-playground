@@ -31,6 +31,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
 
         if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
+        this.entityListView = new DeveloperPlayground.EntityListView();
+        this.entityListView.render();
         this.mapview = new DeveloperPlayground.MapView();
         this.mapview.render();
         this.downloadview = new DeveloperPlayground.DownloadView();
@@ -225,7 +227,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         } else if ($entitySelect.val() == "routes") {
             if($parameterSelect.val() == "map view") {
                 collection = this.routes;
-                this.selectMap();
+                this.pselectMap();
                 this.routes.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });
