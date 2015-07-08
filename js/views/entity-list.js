@@ -1,7 +1,8 @@
 var DeveloperPlayground = DeveloperPlayground || {};
 
 DeveloperPlayground.EntityListView = Backbone.View.extend({
-	el: '.form-control#entity',
+    // el: '.form-control#entity',
+	el: '.btn-group#entityMenu',
 
     template: _.template( $('#entity-list-template').html() ),
 

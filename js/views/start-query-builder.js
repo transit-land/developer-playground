@@ -149,9 +149,13 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
     changeFilter: function() {
         var $parameterSelect = $('select.form-control#parameter');
 
+        console.log("changeFilter executed");
+
+
         if($parameterSelect.val() == "name" || $parameterSelect.val() == "operator") {
             collection = this.operators;
             $("#nameMenu").show();
+            console.log("nameMenu show");
             $(".btn#new-york").hide();
             $(".btn#san-francisco").hide();
 
@@ -170,6 +174,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
         } else {
             $("#nameMenu").hide();
+            console.log("nameMenu hide");
+
             this.setMapSF();
             $(".btn#new-york").show();
             $(".btn#san-francisco").show();
@@ -229,7 +235,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
         } else if ($entitySelect.val() == "routes") {
             if($parameterSelect.val() == "map view") {
                 collection = this.routes;
-                this.pselectMap();
+                this.selectMap();
                 this.routes.setQueryParameters({
                     url: API_HOST+'/api/v1/'+$entitySelect.val()+'.json?bbox='+bounds+'&per_page=5000'
                 });

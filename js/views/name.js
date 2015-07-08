@@ -9,6 +9,7 @@ DeveloperPlayground.NameView = Backbone.View.extend({
 		renderedHtml = this.template(this.model.toJSON());
 		this.$el.html(renderedHtml);
 		this.$el.val(this.model.get('onestop_id'));
+		console.log("name render executed");
 		return this;
 	},
 

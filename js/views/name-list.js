@@ -14,6 +14,7 @@ DeveloperPlayground.NameListView = Backbone.View.extend({
             model: model
         });
         $(".form-control#name", this.$el).append(nameView.render().$el);
+        console.log("renderName executed");
     },
 
     selectName: function(model) {
@@ -24,6 +25,7 @@ DeveloperPlayground.NameListView = Backbone.View.extend({
     close: function() {
         $('.form-control#name', this.$el).empty();
         this.stopListening();
+        console.log("name-list close executed");
         return this;
     }
 
