@@ -9,7 +9,6 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
     events: {
         'change .form-control#entity': 'selectEntity',
         'change .form-control#parameter': 'selectParam',
-        'change #nameMenu': 'selectName',
         'click .btn#san-francisco': 'changeMapSF',
         'click .btn#new-york': 'changeMapNY',
         'click .btn#run-query-btn' : 'submit'
@@ -25,12 +24,10 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
     render: function() {
         this.$el.html(this.template());
-        $("#nameMenu").hide();
         $(".btn#new-york").hide();
         $(".btn#san-francisco").hide();
 
 
-        if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
         this.entityListView = new DeveloperPlayground.EntityListView();
         this.entityListView.render();
         this.parameterListView = new DeveloperPlayground.ParameterListView();
@@ -104,11 +101,8 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
     changeParam: function() {
 
-        $("#nameMenu").hide();
         $(".btn#new-york").hide();
         $(".btn#san-francisco").hide();
-
-        if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
 
         var $entitySelect = $('select.form-control#entity');
         var $parameterSelect = $('select.form-control#parameter');
@@ -151,21 +145,18 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
         console.log("changeFilter executed");
 
+        if ('undefined' !== typeof this.nameListView) {
+            this.nameListView.close();
+        }
 
         if($parameterSelect.val() == "name" || $parameterSelect.val() == "operator") {
             collection = this.operators;
-            $("#nameMenu").show();
             console.log("nameMenu show");
             $(".btn#new-york").hide();
             $(".btn#san-francisco").hide();
 
-            if(!$("#nameMenu").hasClass("dropdown")) $("#nameMenu").addClass("dropdown");
-            if ('undefined' !== typeof this.nameListView) {
-                this.nameListView.close();
-                this.nameListView = new DeveloperPlayground.NameListView({collection: collection});
-            } else {
-                this.nameListView = new DeveloperPlayground.NameListView({collection: collection});
-            }
+            this.nameListView = new DeveloperPlayground.NameListView({collection: collection});
+
             this.operators.setQueryParameters({
                     url: API_HOST+'/api/v1/operators.json?per_page=5000'
                 });
@@ -173,14 +164,9 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
             return this;
 
         } else {
-            $("#nameMenu").hide();
-            console.log("nameMenu hide");
-
             this.setMapSF();
             $(".btn#new-york").show();
             $(".btn#san-francisco").show();
-
-            if($("#nameMenu").hasClass("dropdown")) $("#nameMenu").removeClass("dropdown");
 
         }
     },
@@ -188,9 +174,10 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
     submit: function() {
         var $entitySelect = $('select.form-control#entity');
         var $parameterSelect = $('select.form-control#parameter');
-        var $nameSelect = $('select.form-control#name');
         var bounds = this.mapview.getBounds();
-        var identifier = $nameSelect.val();
+        if ('undefined' !== typeof this.nameListView) {
+            var identifier = this.nameListView.getName();
+        }
 
         var shouldFetchAndResetCollection = true;
 
@@ -274,7 +261,7 @@ DeveloperPlayground.StartQueryBuilderView = Backbone.View.extend({
 
         // analytics event tracker:
         if ($parameterSelect.val() == "name" || $parameterSelect.val() == "operator"){
-            ga('send', 'event', 'run query', 'click', $entitySelect.val()+' by '+$parameterSelect.val()+', '+$nameSelect.val());
+            ga('send', 'event', 'run query', 'click', $entitySelect.val()+' by '+$parameterSelect.val()+', '+identifier);
         } else {
             ga('send', 'event', 'run query', 'click', $entitySelect.val()+' by '+$parameterSelect.val());
         }
