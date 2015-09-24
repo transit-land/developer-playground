@@ -1,45 +1,35 @@
-.h2{
-  font-weight:400;
-  font-size: $base-font-size;
-  letter-spacing: 2px;
-}
-.col-1{color:$logo-color-1;}
-.col-2{color:$logo-color-2;}
-.col-3{color:$logo-color-3;}
-.col-4{color:$logo-color-4;}
-.col-5{color:$logo-color-5;}
-
-.desc{
-  padding-top:50px;
-}
-
-.white-text{
-  color:#fff;
-}
-
-.center-text{
-  text-align: center;
-}
-
-.instruction{
-  margin-top:250px;
-  text-align: center;
-}
-.run{
-  margin-top:$spacing-unit;
-  margin-bottom:$spacing-unit;
-  text-align: center;
-}
-
 #developer-playground{
   background-color:#232c31;
   padding:50px 0;
-  margin-bottom:$footer-h;
+  margin-bottom: $footer-h;
+
+  p.h2  {
+    margin-bottom: $spacing-unit;
+    margin-top: $spacing-unit;
+  }
+
 }
 
-#developer-playground p.h2{
-  margin-bottom: $spacing-unit;
+
+.h2 {
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.desc {
+  padding-top: 50px;
+}
+
+
+.instruction {
+  margin-top: 250px;
+  text-align: center;
+}
+.run {
   margin-top: $spacing-unit;
+  margin-bottom: $spacing-unit;
+  text-align: center;
 }
 
 .custom-popup#map-view {
@@ -55,7 +45,7 @@
   height:42px;
   margin-right:5px;
   margin-left:5px;
-  background-image : url('../images/icon_dropdown.png');
+  background-image : url('/images/icon_dropdown.png');
   background-repeat: no-repeat;
   background-position: right center;
   vertical-align: baseline;
@@ -73,16 +63,16 @@
 }
 
 #nameMenu{
-  width:950px;
-  height:30px;
-  margin-top:40px;
+  width: 950px;
+  height: 30px;
+  margin-top: 40px;
+  select {
+    width: 100%;
+    position: absolute;
+    top: -15px;
+  }
 }
 
-#nameMenu select{
-  width:100%;
-  position:absolute;
-  top:-15px;
-}
 
 #locationMenu{
   height:30px;
@@ -212,7 +202,7 @@ option{
 }
 
 #loading{
-  background-image:url("../images/loader.gif");
+  background-image:url("/images/loader.gif");
   background-size:cover;
   position:fixed;
   top:55%;
@@ -265,11 +255,11 @@ option{
 
   .h2{
     font-weight:400;
-    font-size:$medium-font-size;
+    font-size:$small-font-size;
     letter-spacing: 1.5px;
   }
   .s-text{
-    font-size:$medium-font-size;
+    font-size:$small-font-size;
     letter-spacing:1px;
   }
 
@@ -294,7 +284,7 @@ option{
 
 @include media-query($on-palm){
   .s-text{
-    font-size:$small-font-size;
+    font-size:$small-font-size * 0.85;
     letter-spacing:0.8px;
   }
 
