@@ -29,11 +29,23 @@ DeveloperPlayground.MapView = Backbone.View.extend({
             scrollWheelZoom: false
         }).setView([37.749, -122.443], 11);
         // run setMapview inside of setview
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/randyme.li1lhlf0/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a target="_blank" href="http://mapbox.com">Mapbox</a>',
-        })
-        .addTo(this.map);
+        var layer = Tangram.leafletLayer({
+            scene: 'https://rawgit.com/tangrams/eraser-map/gh-pages/eraser-map.yaml',
+            numWorkers: 2,
+            attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>',
+            unloadInvisibleTiles: false,
+            updateWhenIdle: false
+        });
+        // L.tileLayer('https://{s}.tiles.mapbox.com/v3/randyme.li1lhlf0/{z}/{x}/{y}.png', {
+        //     maxZoom: 18,
+        //     attribution: 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a target="_blank" href="http://mapbox.com">Mapbox</a>',
+        // })
+        layer.addTo(this.map);
+        // Scene initialized
+        layer.on('init', function() {
+\            map = document.getElementsByTagName("canvas")[0];
+            map.style.zIndex = 1;
+        });
         return this;
     },
 
@@ -177,6 +189,5 @@ DeveloperPlayground.MapView = Backbone.View.extend({
     }
     
 });
-
 
 
