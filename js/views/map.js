@@ -22,18 +22,41 @@ DeveloperPlayground.MapView = Backbone.View.extend({
         this.stopListening();
     },
 
-    
+
+    hasWebGL: function() {
+        //detect webgl is available on the browser
+        var canvas = document.createElement('canvas'),
+            gl,
+            glExperimental = false;
+
+
+        try { gl = canvas.getContext("webgl"); }
+        catch (x) { gl = null; }
+
+        if(gl) { return true; }
+        else { return false; }
+    },
+
     render: function() {
         this.markerclustergroup = new L.MarkerClusterGroup({showCoverageOnHover: false});
+
         this.map = L.map('map-view',{
             scrollWheelZoom: false
         }).setView([37.749, -122.443], 11);
-        // run setMapview inside of setview
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/randyme.li1lhlf0/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a target="_blank" href="http://mapbox.com">Mapbox</a>',
-        })
-        .addTo(this.map);
+
+        var layer;
+        if(this.hasWebGL()) {
+            var layer = Tangram.leafletLayer({
+                 scene: 'https://cdn.rawgit.com/tangrams/multiverse/gh-pages/styles/tangram-toner.yaml',
+                 attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
+             });
+        } else {
+            var layer = L.tileLayer('https://{s}.tiles.mapbox.com/v3/randyme.li1lhlf0/{z}/{x}/{y}.png', {
+             maxZoom: 18,
+             attribution: 'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a target="_blank" href="http://mapbox.com">Mapbox</a>',
+         })
+        }
+        layer.addTo(this.map);
         return this;
     },
 
