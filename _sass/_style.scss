@@ -21,19 +21,19 @@
 
 
 .instruction {
-  margin-top: 250px;
+  margin-top: 240px;
   text-align: center;
 }
 .run {
-  margin-top: $spacing-unit;
-  margin-bottom: $spacing-unit;
+  margin-top: $spacing-unit + 30px;
+  margin-bottom: $spacing-unit + 30px;
   text-align: center;
 }
 
 .custom-popup#map-view {
   color:black;
 }
- 
+
 .queryBuilder-container {
   margin-right: auto;
   margin-left: auto;
@@ -55,7 +55,7 @@
 }
 
 #toggle-container{
-  height:110px;
+  height: 70px;
   text-align: center;
 }
 
@@ -74,7 +74,7 @@
 
 #locationMenu{
   height:30px;
-  margin-top:40px;
+  margin-top:50px;
 }
 
 .form-control {

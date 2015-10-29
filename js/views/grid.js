@@ -97,7 +97,7 @@ DeveloperPlayground.GridView = Backbone.View.extend({
             columns: columns,
             collection: this.collection
             });
-            $("#results").append(grid.render().$el);
+            $("#results").append(grid.render().$el.html());
         } else if ($entitySelect.val() == "routes"){
             columns = [{
                 name: "id",
